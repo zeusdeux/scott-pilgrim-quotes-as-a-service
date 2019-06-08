@@ -1,0 +1,55 @@
+{
+  "name": "scott-pilgrim-quotes-as-a-service",
+  "version": "1.0.0",
+  "description": "Scott Pilgrim vs. the World quotes as a service. Because it's only the best movie ever!",
+  "main": "index.js",
+  "scripts": {
+    "dev": "now dev",
+    "prettier": "prettier --config ./.prettierrc --write \"{api,data,tools}/**/*.{js,json,css,html,md}\""
+  },
+  "keywords": [
+    "scott",
+    "pilgrim",
+    "vs",
+    "the",
+    "world",
+    "movie",
+    "quotes",
+    "lambda",
+    "now",
+    "zeit"
+  ],
+  "author": "Mudit Ameta <zeusdeux@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "husky": "^2.4.0",
+    "lint-staged": "^8.2.0",
+    "prettier": "1.18.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "data/*.json": [
+      "node ./tools/validateQuotes.js",
+      "prettier --write",
+      "git add"
+    ],
+    "**/*.js": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ],
+    "./*.json": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.{md,html,css}": [
+      "prettier --write",
+      "git add"
+    ]
+  }
+}
